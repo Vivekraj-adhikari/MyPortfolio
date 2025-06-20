@@ -3,14 +3,30 @@ import { OrbitControls } from '@react-three/drei'
 import React, { useRef, useMemo } from 'react'
 import { TextureLoader } from 'three';
 
-function DisplayPicture() {
-    const reactTexture = useLoader(TextureLoader, '/icons/React.png');
-    const jsTexture = useLoader(TextureLoader, '/icons/JavaScript.png');
-    const reactRef = useRef();
-    const jsRef = useRef();
+import Icons from './Icons';
+
+function Skills() {
+    const icons = ['CSS3', 'Git', 'GitHub', 'HTML5', 'JavaScript', 'React', 'Tailwind CSS', 'Three.js'];
+    const textures = [];
+
     const { camera } = useThree();
 
-    const meshes = [reactRef, jsRef];
+    const groupRef = useRef();
+    const cssRef = useRef();
+    const gitRef = useRef();
+    const githubRef = useRef();
+    const htmlRef = useRef();
+    const jsRef = useRef();
+    const reactRef = useRef();
+    const tailwindRef = useRef();
+    const threejsRef = useRef();
+
+    const meshes = [cssRef, gitRef, githubRef, htmlRef, jsRef, reactRef, tailwindRef, threejsRef]
+
+    icons.forEach((icon) => {
+        const texture = useLoader(TextureLoader, `/icons/${icon}.png`);
+        textures.push(texture);
+    });
 
     useFrame(() => {
         if(meshes.length > 0){
@@ -21,36 +37,29 @@ function DisplayPicture() {
                 mesh.current.rotation.set(euler.x, euler.y, euler.z);
             })
         }
+        groupRef.current.rotation.y += Math.PI / 360;
     })
 
 
     return (
-        <group>
-            <mesh ref={reactRef} position={[0, 0, -2]}>
-                <planeGeometry args={[2, 2, 2]} />
-                <meshBasicMaterial
-                    map={reactTexture}
-                    transparent={false}
-                    alphaTest={0.5}
-                />
-            </mesh>
-            <mesh ref={jsRef} position={[0, 0, 2]}>
-                <planeGeometry args={[2, 2, 2]} />
-                <meshBasicMaterial
-                    map={jsTexture}
-                    transparent={false}
-                    alphaTest={0.5}
-                />
-            </mesh>
+        <group ref={groupRef}>
+            <Icons map={textures[0]} position={[0, 0, 2]} ref={cssRef} />
+            <Icons map={textures[1]} position={[0, 0, -2]} ref={gitRef} />
+            <Icons map={textures[2]} position={[-2, 0, 0]} ref={githubRef} />
+            <Icons map={textures[3]} position={[2, 0, 0]} ref={htmlRef} />
+            <Icons map={textures[4]} position={[1, 0, 1]} ref={jsRef} />
+            <Icons map={textures[5]} position={[1, 0, -1]} ref={reactRef} />
+            <Icons map={textures[6]} position={[-1, 0, 1]} ref={tailwindRef} />
+            <Icons map={textures[7]} position={[-1, 0, -1]} ref={threejsRef} />
         </group>
     )
 }
 
-function AnimateCube() {
+function AnimateIcons() {
     return(
-        <div className='bg-gray-400 max-w-3xl w-96 h-96'>
+        <div className='bg-slate-950 max-w-3xl w-96 h-96'>
             <Canvas>
-                <DisplayPicture />
+                <Skills />
                 <ambientLight intensity={0.5} />
                 <directionalLight intensity={2}/>
                 <OrbitControls />
@@ -59,4 +68,4 @@ function AnimateCube() {
     )
 }
 
-export default AnimateCube
+export default AnimateIcons
