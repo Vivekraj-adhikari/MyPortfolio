@@ -1,18 +1,14 @@
 import { useState } from 'react'
 import './App.css'
 import Book from './components/Book'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import Content from './components/Content'
 
 function App() {
   return (
     <>
-      <Canvas>
-        <directionalLight intensity={1}/>
-        <ambientLight intensity={0.5} />
-        <Book />
-        <OrbitControls />
-      </Canvas>
+      <div className='w-full h-full flex items-center justify-center relative'>
+        <Content />
+      </div>
     </>
   )
 }
