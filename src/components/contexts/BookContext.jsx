@@ -5,7 +5,7 @@ export const BookContext = createContext({
     page: "home",
     nextPage: () => {},
     prevPage: () => {},
-})
+});
 
 export const BookProvider = BookContext.Provider;
 
