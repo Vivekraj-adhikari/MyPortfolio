@@ -1,8 +1,7 @@
 import { useContext, createContext } from "react";
 
 export const BookContext = createContext({
-    opened: false,
-    page: "home",
+    currentPage: 0,
     nextPage: () => {},
     prevPage: () => {},
 })
