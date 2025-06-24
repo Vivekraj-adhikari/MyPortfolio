@@ -29,10 +29,10 @@ function Pages({ position, currentPage, pageIndex }){
   const skinIndices = [];
   const skinWeights = [];
 
-  for(let i = 0; i < positions.count; i++){
+  for (let i = 0; i < positions.count; i++) {
     vertex.fromBufferAttribute(positions, i);
     const x = vertex.x;
-    const skinIndex = Math.max(0, Math.floor(x / SEGMENT_WIDTH));
+    let skinIndex = Math.min(PAGE_SEGMENTS - 1, Math.floor(x / SEGMENT_WIDTH));
     let skinWeight = (x % SEGMENT_WIDTH) / SEGMENT_WIDTH;
 
     skinIndices.push(skinIndex, skinIndex + 1, 0, 0);
@@ -87,9 +87,9 @@ function Pages({ position, currentPage, pageIndex }){
 
   const targetRotation = () => {
     if (pageIndex < currentPage) {
-      return -Math.PI * 0.95;
+      return Math.PI * 0.95;
     } else if (pageIndex === currentPage) {
-      return pageIndex === 0 ? 0 : -Math.PI;
+      return pageIndex === 0 ? 0 : Math.PI;
     } else {
       return 0;
     }
