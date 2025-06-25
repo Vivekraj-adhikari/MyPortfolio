@@ -88,9 +88,8 @@ function Pages({ position, currentPage, pageIndex }){
   const targetRotation = () => {
     if (pageIndex < currentPage) {
       return Math.PI * 0.95;
-    } else if (pageIndex === currentPage) {
-      return pageIndex === 0 ? 0 : Math.PI;
-    } else {
+    }
+    else {
       return 0;
     }
   }
@@ -98,7 +97,7 @@ function Pages({ position, currentPage, pageIndex }){
   useFrame(() => {
     if(pageRef.current){
       const target = targetRotation();
-      pageRef.current.rotation.y = THREE.MathUtils.lerp(pageRef.current.rotation.y, target, 0.08);
+      manualSkinnedMesh.skeleton.bones[0].rotation.y = THREE.MathUtils.lerp(manualSkinnedMesh.skeleton.bones[0].rotation.y, target, 0.01);
     }
   })
 
