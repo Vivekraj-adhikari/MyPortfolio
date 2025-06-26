@@ -13,13 +13,14 @@ function Content() {
 
     const prevPage = () => {
         setCurrentPage(prev => prev - 1);
+        console.log(currentPage);
     }
     return (
         <BookProvider value={{currentPage, nextPage, prevPage}}>
-            <button className="absolute left-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-gray-300 rounded">
+            <button onClick={() => prevPage()} className="absolute left-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-gray-300 rounded">
                 Previous
             </button>
-            <div className='w-full h-full'>
+            <div className='w-1/2 h-1/2 bg-amber-500'>
                 <Canvas>
                     <directionalLight intensity={1} />
                     <ambientLight intensity={0.5} />
